@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/Authcontext'
 import { useNavigate } from 'react-router-dom';
+import RegisterForm from '../components/forms/RegistrationForm';
+
+
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -42,6 +45,7 @@ const Register = () => {
           Register
         </button>
       </form>
+      <RegisterForm/>
     </div>
   );
 };

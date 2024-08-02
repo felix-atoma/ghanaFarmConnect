@@ -52,7 +52,7 @@ const ProfileForm = () => {
           required
         />
       </div>
-      <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
+      <button type="submit" className="bg-[#71B34A] text-[#FFFFFF] px-4 py-2 rounded">
         Save Changes
       </button>
     </form>

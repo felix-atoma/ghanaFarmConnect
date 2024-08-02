@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/Authcontext';
 import { useNavigate } from 'react-router-dom';
+import LoginForm from '../components/forms/LoginForm';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -42,6 +43,7 @@ const Login = () => {
           Login
         </button>
       </form>
+      <LoginForm/>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import ProductForm from '../components/forms/ProductionForm';
 import ProductList from '../components/list/ProductionList'
 import OrderList from '../components/list/OderList';
+// import Map from '../components/Map';
 
 const FarmerDashboard = () => {
   return (
@@ -10,6 +11,7 @@ const FarmerDashboard = () => {
       <ProductForm />
       <ProductList />
       <OrderList />
+      {/* <Map/> */}
     </div>
   );
 };

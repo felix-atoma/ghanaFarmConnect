@@ -5,9 +5,12 @@ import Footer from './layout/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile'
 import FarmerDashboard from './pages/FarmerDashboard';
 import CustomerDashboard from './pages/CustomerDashboard';
+import SignUp from './pages/SignUpage';
 import { AuthProvider } from './context/Authcontext'
+import LanguageSwitcher from './layout/LanguageSwitcher';
 
 const App = () => {
   return (
@@ -20,8 +23,12 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
               <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/languafe-switcher" element={<LanguageSwitcher />} />
+            
             </Routes>
           </main>
           <Footer />
