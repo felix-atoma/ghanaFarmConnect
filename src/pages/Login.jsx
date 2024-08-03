@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/Authcontext';
+import { useAuth } from '../context/Authcontext';// Make sure this path is correct
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: ''
   });
-  const { login } = useAuth();
+  const [error, setError] = useState('');
+  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,11 +21,21 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Clear previous error
+
     try {
       await login(formData);
-      navigate('/'); // Redirect to home page after successful login
+      if (isAuthenticated()) {
+        navigate('/'); // Redirect to home page after successful login
+      }
     } catch (error) {
-      alert('Login failed');
+      if (error.response && error.response.status === 401) {
+        setError('Login failed: Incorrect email or password');
+      } else if (error.response && error.response.status === 404) {
+        setError('Login failed: User not registered');
+      } else {
+        setError('Login failed: Something went wrong');
+      }
     }
   };
 
@@ -38,10 +49,10 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex flex-col space-y-2">
               <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={formData.username}
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
                 onChange={handleChange}
                 className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-colors"
                 required
@@ -56,6 +67,9 @@ const Login = () => {
                 required
               />
             </div>
+            {error && (
+              <p className="text-red-500 text-center">{error}</p>
+            )}
             <button
               type="submit"
               className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700 transition-colors"
