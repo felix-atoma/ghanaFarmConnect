@@ -35,7 +35,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="bg-white relative">
       {/* Image with overlay and button revealed on scroll */}
       <div
         ref={imageRef}
@@ -50,13 +50,17 @@ const Home = () => {
       </div>
 
       <div className="relative z-0 container mx-auto p-4">
-        <h2 className="text-4xl font-bold mb-6 text-center">Welcome to FarmConnect Ghana</h2>
-
-        {/* Header Video */}
-        <video className="w-full mb-6 rounded-lg shadow-lg" controls>
-          <source src="/path/to/example.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {/* Header Video with Text Overlay */}
+        <div className="relative mb-6">
+          <video className="w-full rounded-lg shadow-lg" controls>
+            <source src="/path/to/example.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white p-4 rounded-lg text-center">
+            <h2 className="text-4xl font-bold mb-2">Welcome to FarmConnect Ghana</h2>
+            <p className="text-lg">Efficient way of bridging the gap between consumers and farmers.</p>
+          </div>
+        </div>
 
         <p className="mb-8 text-lg">
           FarmConnect Ghana is a web application aimed to bridge the gap between Ghanaian farmers and customers,
@@ -69,7 +73,7 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* SDG 1: No Poverty */}
           <div className="flex flex-col items-center text-center">
-            <FaHandHoldingHeart className="text-5xl text-green-500 mb-4" />
+            <FaHandHoldingHeart style={{ color: '#FFD700' }} className="text-5xl mb-4" />
             <h4 className="text-xl font-bold mb-2">SDG 1: No Poverty</h4>
             <p>
               FarmConnect Ghana helps reduce poverty by improving market access and profitability for smallholder
@@ -79,7 +83,7 @@ const Home = () => {
 
           {/* SDG 2: Zero Hunger */}
           <div className="flex flex-col items-center text-center">
-            <FaLeaf className="text-5xl text-green-500 mb-4" />
+            <FaLeaf style={{ color: '#FFD700' }} className="text-5xl mb-4" />
             <h4 className="text-xl font-bold mb-2">SDG 2: Zero Hunger</h4>
             <p>
               By facilitating better market access and fairer prices for agricultural produce, FarmConnect Ghana
@@ -89,7 +93,7 @@ const Home = () => {
 
           {/* SDG 5: Gender Equality */}
           <div className="flex flex-col items-center text-center">
-            <FaGenderless className="text-5xl text-green-500 mb-4" />
+            <FaGenderless style={{ color: '#FFD700' }} className="text-5xl mb-4" />
             <h4 className="text-xl font-bold mb-2">SDG 5: Gender Equality</h4>
             <p>
               FarmConnect Ghana empowers women farmers by providing equal access to market information, resources,
@@ -99,7 +103,7 @@ const Home = () => {
 
           {/* SDG 13: Climate Action */}
           <div className="flex flex-col items-center text-center">
-            <FaGlobe className="text-5xl text-green-500 mb-4" />
+            <FaGlobe style={{ color: '#FFD700' }} className="text-5xl mb-4" />
             <h4 className="text-xl font-bold mb-2">SDG 13: Climate Action</h4>
             <p>
               By promoting sustainable farming practices, FarmConnect Ghana contributes to climate action and
@@ -140,10 +144,10 @@ const Home = () => {
           </div>
 
           <div className="mt-8 text-center">
-            <p className="text-lg font-semibold">Agrisolve Ghana Ltd</p>
+            <p className="text-lg font-semibold">Farm Ghana Ltd</p>
             <p className="mt-2">We look forward to interacting with you.</p>
-            <p className="mt-2">Email: <a href="mailto:info@agrisolvegh.com" className="text-blue-500">info@agrisolvegh.com</a></p>
-            <p className="mt-2">Phone: <a href="tel:+233552000004" className="text-blue-500">055-200-0004</a></p>
+            <p className="mt-2">Email: <a href="mailto:info@farmghanaconnect.com" className="text-blue-500">info@farmghanaconnect.com</a></p>
+            <p className="mt-2">Phone: <a href="tel:+233244173068" className="text-blue-500">0244-1730-68</a></p>
           </div>
         </div>
 
@@ -158,7 +162,6 @@ const Home = () => {
             {/* Add more content here as needed */}
           </div>
         </div>
-
       </div>
     </div>
   );

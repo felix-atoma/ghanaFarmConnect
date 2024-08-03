@@ -40,57 +40,62 @@ const Navbar = () => {
           <div className="flex items-center mt-2 md:mt-0">
             <Link className="text-white mr-4" to="/">Home</Link>
 
-            {/* Dashboard Menu */}
-            <div className="relative">
-              <button
-                className="text-white mr-4 flex items-center focus:outline-none"
-                onClick={toggleDashboardMenu}
-              >
-                Dashboard <HiChevronDown className="ml-1" />
-              </button>
-              {isDashboardOpen && (
-                <div className="absolute bg-white text-black p-2 mt-2 shadow-lg rounded-md">
-                  <Link className="block px-4 py-2 hover:bg-gray-200" to="/farmer-dashboard">
-                    Farmer Dashboard
-                  </Link>
-                  <Link className="block px-4 py-2 hover:bg-gray-200" to="/customer-dashboard">
-                    Customer Dashboard
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Auth Links */}
-            {user ? (
-              <>
-                {/* Profile Dropdown */}
-                <div className="relative">
-                  <button
-                    className="text-white mr-4 flex items-center focus:outline-none"
-                    onClick={toggleProfileMenu}
-                  >
-                    Profile <HiChevronDown className="ml-1" />
-                  </button>
-                  {isProfileOpen && (
-                    <div className="absolute bg-white text-black p-2 mt-2 shadow-lg rounded-md">
-                      <Link className="block px-4 py-2 hover:bg-gray-200" to="/profile">
-                        View Profile
-                      </Link>
-                      <Link className="block px-4 py-2 hover:bg-gray-200" to="/settings">
-                        Settings
-                      </Link>
-                    </div>
-                  )}
-                </div>
-                <button onClick={logout} className="text-white mr-4">Logout</button>
-              </>
-            ) : (
+            {/* Links for non-authenticated users */}
+            {!user && (
               <>
                 <Link to="/register" className="text-white mr-4">Register</Link>
-                <Link to="/profile" className='text-white mr-4'>Profile</Link>
                 <Link to="/login" className="text-white mr-4">Login</Link>
               </>
             )}
+
+            {/* Dashboard Menu (Visible only when logged in) */}
+            {user && (
+              <div className="relative">
+                <button
+                  className="text-white mr-4 flex items-center focus:outline-none"
+                  onClick={toggleDashboardMenu}
+                >
+                  Dashboard <HiChevronDown className="ml-1" />
+                </button>
+                {isDashboardOpen && (
+                  <div className="absolute bg-white text-black p-2 mt-2 shadow-lg rounded-md">
+                    <Link className="block px-4 py-2 hover:bg-gray-200" to="/farmer-dashboard">
+                      Farmer Dashboard
+                    </Link>
+                    <Link className="block px-4 py-2 hover:bg-gray-200" to="/customer-dashboard">
+                      Customer Dashboard
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Profile Dropdown (Visible only when logged in) */}
+            {user && (
+              <div className="relative">
+                <button
+                  className="text-white mr-4 flex items-center focus:outline-none"
+                  onClick={toggleProfileMenu}
+                >
+                  Profile <HiChevronDown className="ml-1" />
+                </button>
+                {isProfileOpen && (
+                  <div className="absolute bg-white text-black p-2 mt-2 shadow-lg rounded-md">
+                    <Link className="block px-4 py-2 hover:bg-gray-200" to="/profile">
+                      View Profile
+                    </Link>
+                    <Link className="block px-4 py-2 hover:bg-gray-200" to="/settings">
+                      Settings
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {user && (
+              <button onClick={logout} className="text-white mr-4">Logout</button>
+            )}
+            
             <LanguageSwitcher />
           </div>
         </div>
