@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const CustomerProfile = () => {
   const [profile, setProfile] = useState({
-    firstName: 'Jane',
-    lastName: 'Smith',
-    email: 'jane.smith@example.com',
-    phone: '987-654-3210',
-    location: 'Kumasi', // or default location
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    location: '',
   });
+
+  // Fetch the current profile data from an API or local storage
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        // Replace with your API endpoint
+        const response = await fetch('/api/customer/profile');
+        const data = await response.json();
+        setProfile(data);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,17 +33,35 @@ const CustomerProfile = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle profile update logic
+
+    try {
+      // Replace with your API endpoint
+      const response = await fetch('/api/customer/profile/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profile),
+      });
+
+      if (response.ok) {
+        alert('Profile updated successfully!');
+      } else {
+        alert('Failed to update profile. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('An error occurred while updating your profile.');
+    }
   };
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="flex w-full max-w-4xl bg-white shadow-lg rounded-lg">
         <div className="w-1/2 bg-gray-200 flex items-center justify-center">
-          {/* Place your photo or graphic here */}
-          <img src="/path/to/photo.jpg" alt="Customer" className="object-cover w-full h-full rounded-l-lg" />
+          <img src="src/assets/1524808aeef81a986379fcc475f4b1ce.jpg" alt="Customer" className="object-cover w-full h-full rounded-l-lg" />
         </div>
         <div className="w-1/2 p-6">
           <h2 className="text-2xl font-bold text-green-600 mb-6">Customer Profile</h2>

@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const FarmerProfile = () => {
   const [profile, setProfile] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '123-456-7890',
-    farmName: 'Doe Farm',
-    location: 'Accra', // or default location
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    farmName: '',
+    location: '',
   });
+
+  // Fetch the current profile data from an API or local storage
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        // Replace with your API endpoint
+        const response = await fetch('/api/profile');
+        const data = await response.json();
+        setProfile(data);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,17 +34,35 @@ const FarmerProfile = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle profile update logic
+    
+    try {
+      // Replace with your API endpoint
+      const response = await fetch('/api/profile/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profile),
+      });
+
+      if (response.ok) {
+        alert('Profile updated successfully!');
+      } else {
+        alert('Failed to update profile. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('An error occurred while updating your profile.');
+    }
   };
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="flex w-full max-w-4xl bg-white shadow-lg rounded-lg">
         <div className="w-1/2 bg-gray-200 flex items-center justify-center">
-          {/* Place your photo or graphic here */}
-          <img src="/path/to/photo.jpg" alt="Farmer" className="object-cover w-full h-full rounded-l-lg" />
+          <img src="src/assets/73fcb675e2a92cb12d6532141bfb7fc5.jpg" alt="Farmer" className="object-cover w-full h-full rounded-l-lg" />
         </div>
         <div className="w-1/2 p-6">
           <h2 className="text-2xl font-bold text-green-600 mb-6">Farmer Profile</h2>

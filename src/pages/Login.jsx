@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
   const [userRole, setUserRole] = useState('');
@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <div className="flex justify-between items-center p-6 bg-white min-h-screen">
       <div className="w-1/2">
-        <img src="path-to-your-photo.jpg" alt="Login" className="w-full h-full object-cover" />
+        <img src="src/assets/73fcb675e2a92cb12d6532141bfb7fc5.jpg" alt="Login" className="w-full h-full object-cover" />
       </div>
       <div className="w-1/2 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-3xl font-bold text-green-600 mb-4">Login</h2>
@@ -111,6 +111,15 @@ const Login = () => {
             >
               Login
             </button>
+
+            <div className="mt-4 text-center">
+              <p className="text-gray-600">
+                Don't have an account?{' '}
+                <Link to="/register" className="text-green-600 hover:underline">
+                  Register here
+                </Link>
+              </p>
+            </div>
           </form>
         )}
       </div>
