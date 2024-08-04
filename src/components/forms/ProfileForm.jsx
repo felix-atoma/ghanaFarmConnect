@@ -1,62 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../context/Authcontext';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from '../../services/firebase';
 
-const ProfileForm = () => {
+const UserProfile = () => {
+  const { currentUser } = useAuth();
   const [profile, setProfile] = useState({
     name: '',
     location: '',
     contact: '',
   });
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const docRef = doc(db, 'users', currentUser.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setProfile(docSnap.data());
+      }
+    };
+    fetchProfile();
+  }, [currentUser.uid]);
+
   const handleChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Logic to handle profile submission
+  const handleSave = async () => {
+    try {
+      await setDoc(doc(db, 'users', currentUser.uid), profile);
+      alert('Profile updated successfully');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
-      <h3 className="text-2xl mb-4">Edit Profile</h3>
-      <div className="mb-4">
-        <label className="block mb-2">Name</label>
-        <input
-          type="text"
-          name="name"
-          className="w-full p-2 border border-gray-300 rounded"
-          value={profile.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block mb-2">Location</label>
-        <input
-          type="text"
-          name="location"
-          className="w-full p-2 border border-gray-300 rounded"
-          value={profile.location}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block mb-2">Contact</label>
-        <input
-          type="text"
-          name="contact"
-          className="w-full p-2 border border-gray-300 rounded"
-          value={profile.contact}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit" className="bg-[#71B34A] text-[#FFFFFF] px-4 py-2 rounded">
-        Save Changes
-      </button>
-    </form>
+    <div className="profile-container">
+      <h2>Profile</h2>
+      <input
+        type="text"
+        name="name"
+        value={profile.name}
+        onChange={handleChange}
+        placeholder="Name"
+      />
+      <input
+        type="text"
+        name="location"
+        value={profile.location}
+        onChange={handleChange}
+        placeholder="Location"
+      />
+      <input
+        type="text"
+        name="contact"
+        value={profile.contact}
+        onChange={handleChange}
+        placeholder="Contact"
+      />
+      <button onClick={handleSave}>Save</button>
+    </div>
   );
 };
 
-export default ProfileForm;
+export default UserProfile;

@@ -1,6 +1,8 @@
 import React from 'react';
 import ProductList from '../components/list/ProductionList';
 import Chat from '../components/messaging/Chat';
+import SearchBar from '../components/forms/searchBar';
+
 
 const CustomerDashboard = () => {
   return (
@@ -17,12 +19,17 @@ const CustomerDashboard = () => {
           <h3 className="text-orange-600 text-xl font-semibold mb-2">Products</h3>
           <ProductList />
         </section>
+        <section className="bg-orange-100 p-6 rounded-md shadow-md">
+          <h3 className="text-orange-600 text-xl font-semibold mb-2">Seach</h3>
+          <SearchBar/>
+        </section>
 
         {/* Chat Component */}
         <section className="bg-white p-6 rounded-md shadow-md">
           <h3 className="text-green-600 text-xl font-semibold mb-2">Chat</h3>
           <Chat />
         </section>
+        
       </main>
 
       

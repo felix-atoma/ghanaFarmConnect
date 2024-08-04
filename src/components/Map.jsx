@@ -1,26 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../services/firebase';
 
-const Map = ({ farmers, customers }) => {
+const MapView = () => {
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'locations'), (snapshot) => {
+      setLocations(snapshot.docs.map((doc) => doc.data()));
+    });
+    return unsubscribe;
+  }, []);
+
   return (
-    <MapContainer center={[7.9465, -1.0232]} zoom={7} className="h-96">
+    <MapContainer center={[0, 0]} zoom={2} style={{ height: '500px', width: '100%' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {farmers.map((farmer) => (
-        <Marker key={farmer.id} position={[farmer.location.lat, farmer.location.lng]}>
-          <Popup>{farmer.name}</Popup>
-        </Marker>
-      ))}
-      {customers.map((customer) => (
-        <Marker key={customer.id} position={[customer.location.lat, customer.location.lng]}>
-          <Popup>{customer.name}</Popup>
+      {locations.map((location, index) => (
+        <Marker key={index} position={[location.lat, location.lng]}>
+          <Popup>{location.name}</Popup>
         </Marker>
       ))}
     </MapContainer>
   );
 };
 
-export default Map;
+export default MapView;

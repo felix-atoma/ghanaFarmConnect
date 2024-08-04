@@ -7,17 +7,17 @@ const SolutionsCarousel = () => {
 
   const solutions = [
     {
-      image: 'src/assets/apples-1872997_640.jpg',
+      image: 'src/assets/06afe6_00f9e8aa00c541a191d06b38bda10011~mv2.webp',
       caption: 'Expanding Market Access for Farmers',
       moreText: 'Our platform allows farmers to reach broader markets, ensuring their produce is seen by a wider audience, increasing their sales potential and reducing waste.',
     },
     {
-      image: 'src/assets/tractor-385681_1280.jpg',
+      image: 'src/assets/b1de01_72228986dd3b4db2875507528829bed0~mv2.webp',
       caption: 'Ensuring Price Transparency and Fairness',
       moreText: 'By providing clear pricing directly from the farmers, we eliminate middlemen, ensuring that farmers get fair prices for their hard work, and buyers get transparent pricing.',
     },
     {
-      image: 'src/assets/fruit-3247447_640.jpg',
+      image: 'src/assets/market_FarmSmarter.jpeg',
       caption: 'Providing Market Information and Trends',
       moreText: 'Farmers can access vital market trends and data, helping them make informed decisions about what crops to grow and when to sell, maximizing their profitability.',
     },

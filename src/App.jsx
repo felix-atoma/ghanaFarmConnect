@@ -11,6 +11,8 @@ import CustomerDashboard from './pages/CustomerDashboard';
 import SignUp from './pages/SignUpage';
 import { AuthProvider } from './context/Authcontext'
 import LanguageSwitcher from './layout/LanguageSwitcher';
+import FarmerProfile from './pages/FarmerProfile';
+import CustomerProfile from './pages/CustomerProfile';
 
 const App = () => {
   return (
@@ -27,7 +29,9 @@ const App = () => {
               <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
               <Route path="/customer-dashboard" element={<CustomerDashboard />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/languafe-switcher" element={<LanguageSwitcher />} />
+              <Route path="/language-switcher" element={<LanguageSwitcher />} />
+              <Route path="/farmer-profile" element={<FarmerProfile/>} />
+              <Route path="/customer-profile" element={<CustomerProfile />} />
             
             </Routes>
           </main>

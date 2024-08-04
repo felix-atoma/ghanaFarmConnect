@@ -1,8 +1,9 @@
 import React from 'react';
 import ProductList from '../components/list/ProductionList';
-import ProductionForm from '../components/forms/ProductionForm'
-import OrderList from '../components/list/OderList'
-// import Map from '../components/Map';
+import ProductionForm from '../components/forms/ProductionForm';
+import OrderList from '../components/list/OderList';
+import AddProduce from '../components/list/AddProduce';
+import MapView from '../components/Map';
 
 const FarmerDashboard = () => {
   return (
@@ -24,11 +25,18 @@ const FarmerDashboard = () => {
           <h3 className="text-2xl font-semibold text-green-700 mb-4">Order List</h3>
           <OrderList />
         </div>
+        
+        <div className="mb-8 p-4 bg-white rounded-lg shadow-md">
+          <h3 className="text-2xl font-semibold text-green-700 mb-4">Add Produce</h3>
+          <AddProduce />
+        </div>
 
-        {/* <div className="mb-8 p-4 bg-white rounded-lg shadow-md">
+        <div className="mb-8 p-4 bg-white rounded-lg shadow-md">
           <h3 className="text-2xl font-semibold text-green-700 mb-4">Map</h3>
-          <Map />
-        </div> */}
+          <div className="relative w-full h-96"> {/* Ensure the map container is properly sized */}
+            <MapView />
+          </div>
+        </div>
       </div>
     </div>
   );

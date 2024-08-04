@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { collection, doc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../services/firebase';
 
-const OrderList = () => {
-  const orders = [
-    // Dummy data for now
-    { id: 1, product: 'Tomatoes', quantity: 10, customer: 'John Doe', status: 'Pending' },
-    { id: 2, product: 'Carrots', quantity: 5, customer: 'Jane Smith', status: 'Confirmed' },
-  ];
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'orders'), (snapshot) => {
+      setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+    return unsubscribe;
+  }, []);
+
+  const updateOrderStatus = async (id, status) => {
+    await updateDoc(doc(db, 'orders', id), {
+      status,
+    });
+  };
 
   return (
-    <div className="mb-4">
-      <h3 className="text-2xl mb-4">Orders</h3>
-      <ul>
-        {orders.map((order) => (
-          <li key={order.id} className="mb-2 p-4 border border-gray-300 rounded">
-            <h4 className="text-xl">{order.product}</h4>
-            <p>Quantity: {order.quantity}</p>
-            <p>Customer: {order.customer}</p>
-            <p>Status: {order.status}</p>
-          </li>
-        ))}
-      </ul>
+    <div className="orders">
+      <h2>Orders</h2>
+      {orders.map((order) => (
+        <div key={order.id}>
+          <p>Product: {order.productName}</p>
+          <p>Status: {order.status}</p>
+          <button onClick={() => updateOrderStatus(order.id, 'shipped')}>Mark as Shipped</button>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default OrderList;
+export default Orders;
