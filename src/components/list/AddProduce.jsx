@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../../services/firebase';
+import { db } from '../../Firebase';
 
 const AddProduce = () => {
   const [produceName, setProduceName] = useState('');

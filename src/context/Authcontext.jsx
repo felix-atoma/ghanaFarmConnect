@@ -1,37 +1,30 @@
-import React, { createContext, useContext, useState } from 'react';
+// src/context/AuthContext.jsx
 
-// Create an AuthContext
+import { createContext, useContext, useState } from 'react';
+// Correct path and name
+ // Ensure this export exists
+
 const AuthContext = createContext();
 
-// Provide AuthContext to the rest of the app
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Set user state
+  const [user, setUser] = useState(null);
 
-  // Mock login function
-  const login = async ({ email, password }) => {
-    // Replace with actual login logic (e.g., API call)
-    // Example: Mock successful login
-    const mockUser = { email }; // Example user data
-    setUser(mockUser);
-    return mockUser;
+  const handleLogin = async (email, password) => {
+    try {
+      const userData = await loginUser(email, password);
+      setUser(userData.user); // Adjust according to the actual response structure
+      localStorage.setItem('token', userData.token); // Adjust as needed
+    } catch (error) {
+      console.error('Login failed:', error);
+      setUser(null);
+    }
   };
-
-  // Mock logout function
-  const logout = () => {
-    setUser(null);
-  };
-
-  // Check if user is authenticated
-  const isAuthenticated = () => user !== null;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, handleLogin }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to use AuthContext
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

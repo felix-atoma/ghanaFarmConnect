@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { db } from '../../services/firebase';
+import { db } from '../../Firebase';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);

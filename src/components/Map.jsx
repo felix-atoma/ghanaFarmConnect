@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { db } from '../services/firebase';
+import { db } from '../Firebase';
 
 const MapView = () => {
   const [locations, setLocations] = useState([]);
