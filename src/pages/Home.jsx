@@ -156,7 +156,7 @@ const Home = () => {
           <div className="container mx-auto py-16">
             <h2 className="text-3xl font-bold mb-4">Additional Content</h2>
             <p className="text-lg mb-4">
-              This section and others that follow will cover the image completely as you scroll past it. 
+              This section and others that follow will cover the image completely as you scroll past it.
               Make sure that your content has a background color (like white) to cover the image.
             </p>
             {/* Add more content here as needed */}

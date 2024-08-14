@@ -10,6 +10,7 @@ const Register = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('customer'); // Default role
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -29,8 +30,12 @@ const Register = () => {
     // Implement your registration logic here
     // For example, call Firebase authentication or your backend API
 
-    // Redirect to profile page after successful registration
-    navigate('/profile'); // Adjust the path as needed
+    // Redirect to the appropriate dashboard based on role
+    if (role === 'farmer') {
+      navigate('/farmer-dashboard'); // Adjust the path as needed
+    } else {
+      navigate('/customer-dashboard'); // Adjust the path as needed
+    }
   };
 
   return (
@@ -96,6 +101,21 @@ const Register = () => {
               onChange={(e) => setPhone(e.target.value)}
               required
             />
+          </div>
+
+          <div>
+            <label className="block text-black font-medium mb-1" htmlFor="role">I am a:</label>
+            <select
+              id="role"
+              name="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="w-full px-3 py-2 border border-green-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              required
+            >
+              <option value="customer">Customer</option>
+              <option value="farmer">Farmer</option>
+            </select>
           </div>
 
           <div>
@@ -166,7 +186,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+            className="w-full px-4 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
             Register
           </button>
